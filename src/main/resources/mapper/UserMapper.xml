@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruomu.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ruomu.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="zhanghao" jdbcType="VARCHAR" property="zhanghao" />
+    <result column="mima" jdbcType="VARCHAR" property="mima" />
+    <result column="shoujihao" jdbcType="VARCHAR" property="shoujihao" />
+    <result column="nianling" jdbcType="INTEGER" property="nianling" />
+    <result column="zhuzhi" jdbcType="VARCHAR" property="zhuzhi" />
+    <result column="quanxian" jdbcType="INTEGER" property="quanxian" />
+    <result column="zhuce_time" jdbcType="TIMESTAMP" property="zhuceTime" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ruomu.pojo.User">
+    <result column="touxiang" jdbcType="LONGVARBINARY" property="touxiang" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, UserName, zhanghao, mima, shoujihao, nianling, zhuzhi, quanxian, zhuce_time, 
+    ip
+  </sql>
+  <sql id="Blob_Column_List">
+    touxiang
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ruomu.pojo.User">
+    insert into user (id, UserName, zhanghao, 
+      mima, shoujihao, nianling, 
+      zhuzhi, quanxian, zhuce_time, 
+      ip, touxiang)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{zhanghao,jdbcType=VARCHAR}, 
+      #{mima,jdbcType=VARCHAR}, #{shoujihao,jdbcType=VARCHAR}, #{nianling,jdbcType=INTEGER}, 
+      #{zhuzhi,jdbcType=VARCHAR}, #{quanxian,jdbcType=INTEGER}, #{zhuceTime,jdbcType=TIMESTAMP}, 
+      #{ip,jdbcType=VARCHAR}, #{touxiang,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruomu.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="zhanghao != null">
+        zhanghao,
+      </if>
+      <if test="mima != null">
+        mima,
+      </if>
+      <if test="shoujihao != null">
+        shoujihao,
+      </if>
+      <if test="nianling != null">
+        nianling,
+      </if>
+      <if test="zhuzhi != null">
+        zhuzhi,
+      </if>
+      <if test="quanxian != null">
+        quanxian,
+      </if>
+      <if test="zhuceTime != null">
+        zhuce_time,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="touxiang != null">
+        touxiang,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="zhanghao != null">
+        #{zhanghao,jdbcType=VARCHAR},
+      </if>
+      <if test="mima != null">
+        #{mima,jdbcType=VARCHAR},
+      </if>
+      <if test="shoujihao != null">
+        #{shoujihao,jdbcType=VARCHAR},
+      </if>
+      <if test="nianling != null">
+        #{nianling,jdbcType=INTEGER},
+      </if>
+      <if test="zhuzhi != null">
+        #{zhuzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="quanxian != null">
+        #{quanxian,jdbcType=INTEGER},
+      </if>
+      <if test="zhuceTime != null">
+        #{zhuceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="touxiang != null">
+        #{touxiang,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruomu.pojo.User">
+    update user
+    <set>
+      <if test="username != null">
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="zhanghao != null">
+        zhanghao = #{zhanghao,jdbcType=VARCHAR},
+      </if>
+      <if test="mima != null">
+        mima = #{mima,jdbcType=VARCHAR},
+      </if>
+      <if test="shoujihao != null">
+        shoujihao = #{shoujihao,jdbcType=VARCHAR},
+      </if>
+      <if test="nianling != null">
+        nianling = #{nianling,jdbcType=INTEGER},
+      </if>
+      <if test="zhuzhi != null">
+        zhuzhi = #{zhuzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="quanxian != null">
+        quanxian = #{quanxian,jdbcType=INTEGER},
+      </if>
+      <if test="zhuceTime != null">
+        zhuce_time = #{zhuceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="touxiang != null">
+        touxiang = #{touxiang,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ruomu.pojo.User">
+    update user
+    set UserName = #{username,jdbcType=VARCHAR},
+      zhanghao = #{zhanghao,jdbcType=VARCHAR},
+      mima = #{mima,jdbcType=VARCHAR},
+      shoujihao = #{shoujihao,jdbcType=VARCHAR},
+      nianling = #{nianling,jdbcType=INTEGER},
+      zhuzhi = #{zhuzhi,jdbcType=VARCHAR},
+      quanxian = #{quanxian,jdbcType=INTEGER},
+      zhuce_time = #{zhuceTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      touxiang = #{touxiang,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruomu.pojo.User">
+    update user
+    set UserName = #{username,jdbcType=VARCHAR},
+      zhanghao = #{zhanghao,jdbcType=VARCHAR},
+      mima = #{mima,jdbcType=VARCHAR},
+      shoujihao = #{shoujihao,jdbcType=VARCHAR},
+      nianling = #{nianling,jdbcType=INTEGER},
+      zhuzhi = #{zhuzhi,jdbcType=VARCHAR},
+      quanxian = #{quanxian,jdbcType=INTEGER},
+      zhuce_time = #{zhuceTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByZhangHao" parameterType="String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where zhanghao = #{zhanghao,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>
